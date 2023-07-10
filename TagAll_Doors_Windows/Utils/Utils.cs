@@ -63,7 +63,6 @@ namespace TagAll_Doors_Windows
 
         internal static void TagAllUntaggedDoorsInView(Document curDoc, View flrPlan)
         {
-
             // get all doors in the view
             ICollection<ElementId> m_DoorIds = new FilteredElementCollector(curDoc, flrPlan.Id)
                 .OfCategory(BuiltInCategory.OST_Doors)
@@ -128,7 +127,66 @@ namespace TagAll_Doors_Windows
 
         internal static void TagAllUntaggedWindowsInView(Document curDoc, View flrPlan)
         {
-            throw new NotImplementedException();
+            // get all windows in the view
+            ICollection<ElementId> m_WndwIds = new FilteredElementCollector(curDoc, flrPlan.Id)
+                .OfCategory(BuiltInCategory.OST_Windows)
+                .WhereElementIsNotElementType()
+                .ToElementIds();
+
+            // filter out already tagged windows
+            // this code doesn't work
+            ICollection<ElementId> m_UntaggedWndwIds = new List<ElementId>();
+            foreach (ElementId wndwId in m_WndwIds)
+            {
+                // review Relationship Inverter page on The Building Coder
+
+                // I don't think this code is right
+
+                FamilyInstance wndw = curDoc.GetElement(wndwId) as FamilyInstance;
+
+                if (wndw != null && wndw.GetParameters("Tag").FirstOrDefault() == null)
+                {
+                    m_UntaggedWndwIds.Add(wndwId);
+                }
+            }
+
+            // set the door tag family & type
+            //FamilySymbol doorTag = Utils.GetTagByName(curDoc, "Door Tag-Type Comments: Type 1"); // value is coming up null
+
+            // get the loaded tag family
+            FilteredElementCollector m_wndwTags = new FilteredElementCollector(curDoc)
+                .OfClass(typeof(FamilySymbol))
+                .OfCategory(BuiltInCategory.OST_WindowTags)
+                .WhereElementIsElementType();
+
+            FamilySymbol wndwTag = m_wndwTags.Cast<FamilySymbol>().FirstOrDefault();
+
+            // create a new tag for each untagged door
+            foreach (ElementId wndwId in m_UntaggedWndwIds)
+            {
+                FamilyInstance wndw = curDoc.GetElement(wndwId) as FamilyInstance;
+
+                if (wndw != null)
+                {
+                    // create a reference for the door
+                    Reference wndwRef = new Reference(wndw);
+
+                    // get the door location
+                    XYZ wndwLoc = (wndw.Location as LocationPoint)?.Point;
+
+                    // create a new tag at the door location
+                    IndependentTag newTag = IndependentTag.Create(curDoc,
+                        wndwTag.Id,
+                        flrPlan.Id,
+                        wndwRef,
+                        false,
+                        TagOrientation.AnyModelDirection,
+                        wndwLoc);
+
+                    // assign tag family symbol
+                    newTag.ChangeTypeId(wndwTag.Id);
+                }
+            }
         }
 
         internal static void MarkAllDoorsInView(Document curDoc, View flrPlan)

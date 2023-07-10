@@ -43,12 +43,6 @@ namespace TagAll_Doors_Windows
             List<View> flrPlans = Utils.GetAllViewsByNameContains(curDoc, "Annotation");
             List<View> dimPlans = Utils.GetAllViewsByNameContains(curDoc, "Dimension");
 
-            // tag variables
-
-            // tag parameters
-            TagMode tmode = TagMode.TM_ADDBY_CATEGORY;
-            TagOrientation tOrient = TagOrientation.Horizontal;
-
             // get form data and do something
 
             // create a transaction
@@ -65,8 +59,8 @@ namespace TagAll_Doors_Windows
                         // tag all doors in view
                         Utils.TagAllUntaggedDoorsInView(curDoc, flrPlan);
 
-                        //// tag all windows in view
-                        //Utils.TagAllUntaggedWindowsInView(curDoc, flrPlan);
+                        // tag all windows in view
+                        Utils.TagAllUntaggedWindowsInView(curDoc, flrPlan);
                     }
                 }
 
