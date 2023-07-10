@@ -116,7 +116,7 @@ namespace TagAll_Doors_Windows
                         flrPlan.Id,
                         doorRef,
                         false,
-                        TagOrientation.AnyModelDirection,
+                        TagOrientation.Horizontal,
                         doorLoc);
 
                     // assign tag family symbol
@@ -180,7 +180,7 @@ namespace TagAll_Doors_Windows
                         flrPlan.Id,
                         wndwRef,
                         false,
-                        TagOrientation.AnyModelDirection,
+                        TagOrientation.Horizontal,
                         wndwLoc);
 
                     // assign tag family symbol
