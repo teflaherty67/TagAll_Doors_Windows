@@ -65,8 +65,8 @@ namespace TagAll_Doors_Windows
                         // tag all doors in view
                         Utils.TagAllUntaggedDoorsInView(curDoc, flrPlan);
 
-                        // tag all windows in view
-                        Utils.TagAllUntaggedWindowsInView(curDoc, flrPlan);
+                        //// tag all windows in view
+                        //Utils.TagAllUntaggedWindowsInView(curDoc, flrPlan);
                     }
                 }
 

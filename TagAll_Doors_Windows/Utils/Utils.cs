@@ -71,6 +71,7 @@ namespace TagAll_Doors_Windows
                 .ToElementIds();
 
             // filter out already tagged doors
+            // this code doesn't work
             ICollection<ElementId> m_UntaggedDoorIds = new List<ElementId>();
             foreach (ElementId doorId in m_DoorIds)
             {
@@ -87,7 +88,15 @@ namespace TagAll_Doors_Windows
             }
 
             // set the door tag family & type
-            FamilySymbol doorTag = Utils.GetTagByName(curDoc, "Door Tag-Type Comments : Type 1");
+            //FamilySymbol doorTag = Utils.GetTagByName(curDoc, "Door Tag-Type Comments: Type 1"); // value is coming up null
+
+            // get the loaded tag family
+            FilteredElementCollector m_doorTags = new FilteredElementCollector(curDoc)
+                .OfClass(typeof(FamilySymbol))
+                .OfCategory(BuiltInCategory.OST_DoorTags)
+                .WhereElementIsElementType();
+
+            FamilySymbol doorTag = m_doorTags.Cast<FamilySymbol>().FirstOrDefault();
 
             // create a new tag for each untagged door
             foreach (ElementId doorId in m_UntaggedDoorIds)
