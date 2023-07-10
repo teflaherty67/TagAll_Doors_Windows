@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command TagAll_Doors_Windows</Text>
+    <Description>Some description for TagAll_Doors_Windows</Description>
+    <Assembly>TagAll_Doors_Windows.dll</Assembly>
+    <FullClassName>TagAll_Doors_Windows.cmdTagDrsWndws</FullClassName>
+    <ClientId>3b0def32-df35-46c3-aefd-1f6f164be02d</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application TagAll_Doors_Windows</Name>
+    <Assembly>TagAll_Doors_Windows.dll</Assembly>
+    <FullClassName>TagAll_Doors_Windows.App</FullClassName>
+    <ClientId>aece7b08-b256-49f5-a6e8-8065747196e1</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+</RevitAddIns>
