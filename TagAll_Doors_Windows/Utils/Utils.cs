@@ -87,7 +87,7 @@ namespace TagAll_Doors_Windows
             }
 
             // set the door tag family & type
-            //FamilySymbol doorTag = Utils.GetTagByName(curDoc, "Door Tag-Type Comments: Type 1"); // value is coming up null
+            //FamilySymbol doorTag = Utils.GetTagByName(curDoc, "Door Tag-Type Comments"); // value is coming up null
 
             // get the loaded tag family
             FilteredElementCollector m_doorTags = new FilteredElementCollector(curDoc)
@@ -247,6 +247,6 @@ namespace TagAll_Doors_Windows
         }
 
         #endregion
-
+      
     }
 }
